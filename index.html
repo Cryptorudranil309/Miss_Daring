@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Miss Daring 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
+
+        :root {
+            --primary-color: #ff3366;
+            --dark-bg: #1a0b10;
+            --text-glow: 0 0 10px rgba(255, 51, 102, 0.8);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #2a0f1b 0%, #000000 100%);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            perspective: 1000px;
+        }
+
+        /* --- Background Effects --- */
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            opacity: 0.8;
+            font-size: 1.2em;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
+
+        .big-heart-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30vw;
+            color: rgba(255, 20, 80, 0.1);
+            z-index: 0;
+            animation: heartbeat 3s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* --- Screen 1: The Proposal --- */
+        #screen-1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+            transition: opacity 1s ease;
+        }
+
+        .poem {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: var(--text-glow);
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .question {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+       /* --- REPLACED BUTTON STYLES --- */
+        .buttons {
+            position: relative;
+            display: flex;
+            gap: 20px;
+            height: 80px; /* Increased height for movement area */
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            /* realistic depth */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 
+                        inset 0 2px 3px rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Realistic YES Button */
+        .btn-yes {
+            background: linear-gradient(135deg, #ff3366, #c70039);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            border: 1px solid #ff6b8b;
+            z-index: 100; /* Always on top */
+        }
+        
+        .btn-yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 51, 102, 0.6),
+                        inset 0 2px 3px rgba(255,255,255,0.3);
+        }
+
+        .btn-yes:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(255, 51, 102, 0.4);
+        }
+
+        /* Realistic NO Button */
+        .btn-no {
+            background: linear-gradient(135deg, #ffffff, #e0e0e0);
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .warning-text {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 15px;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* --- Screen 2: The Gift Box --- */
+        #screen-2 {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .box-heading {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-shadow: var(--text-glow);
+        }
+
+        .scene {
+            width: 150px;
+            height: 150px;
+            perspective: 600px;
+            cursor: pointer;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: bounce 1.5s infinite ease-in-out;
+            transform: rotateX(-20deg) rotateY(45deg);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotateX(-20deg) rotateY(45deg); }
+            50% { transform: translateY(-80px) rotateX(-20deg) rotateY(45deg); }
+        }
+
+        .cube__face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid #ff5e85;
+            background: linear-gradient(135deg, #ff3366, #b3123b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ribbon style */
+        .cube__face::after {
+            content: '';
+            position: absolute;
+            background: gold;
+        }
+        
+        .cube__face--front  { transform: rotateY(  0deg) translateZ(75px); }
+        .cube__face--right  { transform: rotateY( 90deg) translateZ(75px); }
+        .cube__face--back   { transform: rotateY(180deg) translateZ(75px); }
+        .cube__face--left   { transform: rotateY(-90deg) translateZ(75px); }
+        .cube__face--top    { transform: rotateX( 90deg) translateZ(75px); background: #d62453; }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(75px); box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+
+        .cube__face--front::after, .cube__face--back::after, 
+        .cube__face--right::after, .cube__face--left::after {
+            width: 30px; height: 100%;
+        }
+        .cube__face--top::after, .cube__face--bottom::after {
+            width: 30px; height: 100%;
+        }
+        .cube__face--top::before {
+            content: ''; position: absolute; width: 100%; height: 30px; background: gold;
+        }
+
+        /* Particles on impact */
+        .particles {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 20px;
+        }
+        
+        .mini-heart {
+            position: absolute;
+            color: var(--primary-color);
+            font-size: 20px;
+            opacity: 0;
+            animation: puff 1.5s infinite;
+        }
+
+        @keyframes puff {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(var(--tx), -100px) scale(0); opacity: 0; }
+        }
+
+        /* --- Screen 3: The Gallery --- */
+        #screen-3 {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 200px;
+            height: 150px;
+            transform-style: preserve-3d;
+            animation: rotateGallery 20s linear infinite;
+        }
+
+        @keyframes rotateGallery {
+            from { transform: perspective(1000px) rotateY(0deg); }
+            to { transform: perspective(1000px) rotateY(360deg); }
+        }
+
+        .photo-card {
+            position: absolute;
+            width: 200px;
+            height: 280px; /* Portrait ratio */
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid gold;
+            border-radius: 10px;
+            transform-origin: center;
+            left: 0;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            /* Reflection effect */
+            -webkit-box-reflect: below 10px linear-gradient(transparent, rgba(0,0,0,0.4));
+        }
+
+        .photo-card img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        /* Positioning the 4 photos in a square/circle orbit */
+        .p1 { transform: rotateY(0deg) translateZ(250px); }
+        .p2 { transform: rotateY(90deg) translateZ(250px); }
+        .p3 { transform: rotateY(180deg) translateZ(250px); }
+        .p4 { transform: rotateY(270deg) translateZ(250px); }
+
+        .final-msg {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            text-align: center;
+            font-family: 'Dancing Script';
+            font-size: 2rem;
+            color: gold;
+            text-shadow: 0 0 10px black;
+        }
+
+    </style>
+</head>
+<body>
+    <audio id="loveSong" src="c:\Users\Md Zafar Alam\Desktop\souvik\s.mp3" loop></audio>
+
+    <div class="big-heart-bg">❤</div>
+    <div class="snow-container" id="snow-container"></div>
+
+    <div id="screen-1">
+        <div class="poem">
+            Chaand ki roshni bhi feeki lage tere noor ke saamne,<br>
+            Har khushi chhoti lage tere saath ke bahaane.<br>
+            Teri hansi se hi sajti hai meri har subah suhaani,<br>
+            Tere bina adhoori hai meri har ek kahaani.<br>
+            Dil ki har dhadkan bas tera hi naam dohraaye,<br>
+            Meri duniya bas teri hi muskaan se jagmagaaye…<br>
+            <br>
+            <span style="color: #ff99bb;">Aaj himmat karke dil ki baat kahun main online,</span>
+        </div>
+        
+        <div class="question">Miss Daring, kya tum banogi meri valentine? 💖</div>
+
+       <div class="buttons">
+            <button class="btn-yes" onclick="goToStep2()">YES 💖</button>
+            <button class="btn-no" id="btn-no" 
+                    onmouseover="moveButton()" 
+                    onclick="moveButton()" 
+                    ontouchstart="moveButton()">NO 💔</button>
+        </div>
+        <div class="warning-text" id="warning">Don't be stubborn, click Yes! 😉</div>
+    </div>
+
+    <div id="screen-2">
+        <h1 class="box-heading">Dear Miss Daring, click the box...</h1>
+        <div class="scene" onclick="openGift()">
+            <div class="cube">
+                <div class="cube__face cube__face--front"></div>
+                <div class="cube__face cube__face--back"></div>
+                <div class="cube__face cube__face--right"></div>
+                <div class="cube__face cube__face--left"></div>
+                <div class="cube__face cube__face--top"></div>
+                <div class="cube__face cube__face--bottom"></div>
+            </div>
+            <div class="particles" id="particles">
+                </div>
+        </div>
+    </div>
+
+    <div id="screen-3">
+        <div class="gallery-container">
+            <div class="photo-card p1"><img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=600&auto=format&fit=crop" alt="Memory 1"></div>
+            <div class="photo-card p2"><img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=600&auto=format&fit=crop" alt="Memory 2"></div>
+            <div class="photo-card p3"><img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?q=80&w=600&auto=format&fit=crop" alt="Memory 3"></div>
+            <div class="photo-card p4"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop" alt="Memory 4"></div>
+        </div>
+        <div class="final-msg">I love you! 💖</div>
+    </div>
+
+    <script>
+        // --- Snow Effect ---
+        const snowContainer = document.getElementById('snow-container');
+        function createSnow() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            
+            snowContainer.appendChild(snowflake);
+            setTimeout(() => { snowflake.remove(); }, 5000);
+        }
+        setInterval(createSnow, 100);
+
+        // --- No Button Logic ---
+        const btnNo = document.getElementById('btn-no');
+        const warning = document.getElementById('warning');
+        
+       // --- IMPROVED MOVEMENT LOGIC ---
+        function moveButton() {
+            const btnNo = document.getElementById('btn-no');
+            const warning = document.getElementById('warning');
+            
+            // Get screen dimensions minus button size to keep it visible
+            const maxWidth = window.innerWidth - 150; 
+            const maxHeight = window.innerHeight - 100;
+            
+            // Generate random position
+            const x = Math.random() * maxWidth;
+            const y = Math.random() * maxHeight;
+            
+            btnNo.style.position = 'fixed'; // Fixed ensures it moves relative to screen
+            btnNo.style.left = `${x}px`;
+            btnNo.style.top = `${y}px`;
+            
+            // Add a little rotation for fun
+            const randomRot = (Math.random() - 0.5) * 30;
+            btnNo.style.transform = `rotate(${randomRot}deg)`;
+
+            warning.style.opacity = '1';
+        }
+
+        // --- Transition to Box ---
+        function goToStep2() {
+            // --- NEW: Play Music Here ---
+            document.getElementById('loveSong').play(); 
+
+            const s1 = document.getElementById('screen-1');
+            const s2 = document.getElementById('screen-2');
+            
+            s1.style.opacity = '0';
+            setTimeout(() => {
+                s1.style.display = 'none';
+                s2.style.display = 'flex';
+                setTimeout(() => s2.style.opacity = '1', 50);
+                startHeartParticles();
+            }, 1000);
+        }
+
+        // --- Particles Logic ---
+        function startHeartParticles() {
+            const container = document.getElementById('particles');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('mini-heart');
+                heart.textContent = '❤';
+                // Randomize horizontal trajectory
+                const tx = (Math.random() - 0.5) * 100;
+                heart.style.setProperty('--tx', `${tx}px`);
+                
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 1500);
+            }, 200); // Create a heart every 200ms
+        }
+
+        // --- Open Gift Logic ---
+        function openGift() {
+            const s2 = document.getElementById('screen-2');
+            const s3 = document.getElementById('screen-3');
+            const cube = document.querySelector('.cube');
+
+            // Explode effect on cube
+            cube.style.transform = "scale(5) rotateX(20deg)";
+            cube.style.opacity = "0";
+            cube.style.transition = "all 1s ease";
+
+            setTimeout(() => {
+                s2.style.opacity = '0';
+                s2.style.display = 'none';
+                s3.style.display = 'flex';
+                setTimeout(() => s3.style.opacity = '1', 50);
+            }, 800);
+        }
+    </script>
+</body>
+</html>
